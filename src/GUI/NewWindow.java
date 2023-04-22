@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.websocket.Decoder.Text;
+
+import org.apache.catalina.valves.rewrite.InternalRewriteMap.UpperCase;
 
 import entities.JDBC;
 
@@ -25,7 +28,7 @@ public class NewWindow extends JFrame implements ActionListener {
 	
 	JFrame frame = new JFrame();
 	JButton button = new JButton("CADASTRAR USUÁRIO");
-	JButton button2 = new JButton("Clique aqui para abrir outra janela");
+	JButton button2 = new  JButton ("Abrir informações do banco de dados");
 	JLabel label = new JLabel("Hello");
 
 	NewWindow() {
@@ -61,12 +64,13 @@ public class NewWindow extends JFrame implements ActionListener {
 
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
 		if (e.getSource() == button2) {
-			JOptionPane.showMessageDialog(frame, "OI", "Janela", JOptionPane.PLAIN_MESSAGE);
+			//JOptionPane.showMessageDialog(frame, "OI", "Janela", JOptionPane.PLAIN_MESSAGE);
+			MyWindowDatabase MDB = new MyWindowDatabase();
+			
 			
 		}
 
