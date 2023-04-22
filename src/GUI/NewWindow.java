@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
@@ -12,11 +13,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import entities.JDBC;
+
 public class NewWindow extends JFrame implements ActionListener {
 	Scanner sc = new Scanner(System.in);
 	
+	 JDBC jdbc = new JDBC();
+		
+	 
+	
+	
 	JFrame frame = new JFrame();
-	JButton button = new JButton("CADASTRAR USU�RIO");
+	JButton button = new JButton("CADASTRAR USUÁRIO");
 	JButton button2 = new JButton("Clique aqui para abrir outra janela");
 	JLabel label = new JLabel("Hello");
 
@@ -67,8 +75,16 @@ public class NewWindow extends JFrame implements ActionListener {
 			
 			String nome = JOptionPane.showInputDialog("Digite o nome:");
 			String idade = JOptionPane.showInputDialog("Digite a Idade");
-			JOptionPane.showMessageDialog(null,"Usu�rio Cadastrado: " + nome + "\n "+ "idade: " + idade);
+			JOptionPane.showMessageDialog(null,"Usuário Cadastrado: " + nome + "\n "+ "idade: " + idade);
 			frame.setVisible(false);
+			
+			try {
+				jdbc.connect();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 
 	}
