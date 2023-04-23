@@ -12,23 +12,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.websocket.Decoder.Text;
+import entities.User;
 
-import org.apache.catalina.valves.rewrite.InternalRewriteMap.UpperCase;
 
-import entities.JDBC;
+
 
 public class NewWindow extends JFrame implements ActionListener {
 	Scanner sc = new Scanner(System.in);
-	
-	 JDBC jdbc = new JDBC();
-		
-	 
-	
-	
+	//Database database;
+	MyWindowDatabase MDB;
+
 	JFrame frame = new JFrame();
 	JButton button = new JButton("CADASTRAR USUÁRIO");
-	JButton button2 = new  JButton ("Abrir informações do banco de dados");
+	JButton button2 = new JButton("Abrir informações do banco de dados");
 	JLabel label = new JLabel("Hello");
 
 	NewWindow() {
@@ -40,7 +36,7 @@ public class NewWindow extends JFrame implements ActionListener {
 
 		frame.add(label);
 		frame.setTitle("Nome do PROGRAMA");
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setSize(350, 500);
 		frame.setLayout(null);
@@ -66,30 +62,27 @@ public class NewWindow extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 
 		if (e.getSource() == button2) {
-			//JOptionPane.showMessageDialog(frame, "OI", "Janela", JOptionPane.PLAIN_MESSAGE);
-			MyWindowDatabase MDB = new MyWindowDatabase();
-			
-			
+			if (MDB == null) {
+				MDB = new MyWindowDatabase();
+			}
+			MDB.setVisible(true);
+
+		}
+		if (e.getSource() == button) {
+		    String id = JOptionPane.showInputDialog("Digite seu id");
+		    String nome = JOptionPane.showInputDialog("Digite o nome:");
+		    String idade = JOptionPane.showInputDialog("Digite a Idade");
+		    JOptionPane.showMessageDialog(null, "Usuário Cadastrado! \n" + " ID: "  + id +"\n nome: " + nome + "\n " + "idade: " + idade);
+		    frame.setVisible(true);
+
+		    User user = new User(Integer.parseInt(id), nome, Integer.parseInt(idade));
+		    user.inserirNoBanco();
 		}
 
-		if (e.getSource() == button) {
-		//	NewWindow myWindow = new NewWindow();
-			
-			String nome = JOptionPane.showInputDialog("Digite o nome:");
-			String idade = JOptionPane.showInputDialog("Digite a Idade");
-			JOptionPane.showMessageDialog(null,"Usuário Cadastrado: " + nome + "\n "+ "idade: " + idade);
-			frame.setVisible(false);
-			
-			try {
-				jdbc.connect();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
 		}
 
 	}
-}
+
